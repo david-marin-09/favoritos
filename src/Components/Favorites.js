@@ -1,11 +1,11 @@
-import React ,{useEffect, useState} from 'react'
+import React  from 'react'
 import '../App'
 import { useNavigate } from 'react-router-dom'
 import  {useAppContext} from '../Context/AppContext'
 
 const Favorites = () => {
   const { favorites, addToFavorites, removeFromFavorites } = useAppContext();
-  console.log("favorites are", favorites);
+  
   const navigate = useNavigate();
   const FavoritesChecker = (name) => {
     const boolean = favorites.some((people) => people.name == name);
@@ -18,10 +18,11 @@ const Favorites = () => {
         <div className="row">
           {favorites.length > 0 ? (
             favorites.map((item,index) => (
-              <div className="col-md-4" key={index}>
+              <div className="col-md-3" key={index}>
                 <div className="card mb-4 text-bg-secondary">
-
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/640px-Star_Wars_Logo.svg.png" class="card-img-top" alt={item.name}/>
                   <div className="card-body">
+                  
                     <h5 className="card-title">
                       <a onClick={()=>navigate(`/list/${index +1 }`)}>Nombre: {item.name}</a></h5>
                     <p className="card-text">Altura: {item.height}</p>
@@ -30,14 +31,14 @@ const Favorites = () => {
                     {FavoritesChecker(item.name) ? (
                       <a
                         onClick={() => removeFromFavorites(item.name)}
-                        className="btn btn-primary"
+                        className="btn btn-dark"
                       >
                         Eliminar Favoritos
                       </a>
                     ) : (
                       <a
                         onClick={() => addToFavorites(item)}
-                        className="btn btn-primary"
+                        className="btn btn-dark"
                       >
                         Agregar a Favoritos
                       </a>
